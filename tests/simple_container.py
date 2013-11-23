@@ -14,26 +14,21 @@ def main():
 
     vbox = Gtk.Box()
     vbox.set_orientation(Gtk.Orientation.VERTICAL)
-    vbox.set_homogeneous(False)
     window.add(vbox)
 
     #Build the menu
     menubar = Gtk.MenuBar()
     graph_menu = Gtk.Menu()
-    graph = Gtk.MenuItem.new_with_label("Graph")
+    graph = Gtk.MenuItem("Graph")
     graph.set_submenu(graph_menu)
 
-    add_node = Gtk.MenuItem.new_with_label("Add Node")
+    add_node = Gtk.MenuItem("Add Node")
     add_node.connect("activate", menu_item_activated, graphView)
     graph_menu.append(add_node)
 
-    delete = Gtk.MenuItem.new_with_label("Delete Node")
+    delete = Gtk.MenuItem("Delete Node")
     delete.connect("activate", menu_item_activated, graphView)
     graph_menu.append(delete)
-
-    auto_arrange = Gtk.MenuItem.new_with_label("Auto-arrange")
-    auto_arrange.connect("activate", menu_item_activated, graphView)
-    graph_menu.append(auto_arrange)
 
     menubar.append(graph)
 
@@ -65,36 +60,32 @@ def menu_item_activated(menu_item, graph):
         vbox.pack_start(name_entry, False, False, 0)
 
         columns = Gtk.Box()
-        columns.set_homogeneous(False)
+        columns.set_homogeneous(True)
         vbox.pack_start(columns, True, True, 0)
 
         left_column = Gtk.Box()
         left_column.set_orientation(Gtk.Orientation.VERTICAL)
-        left_column.set_homogeneous(False)
         columns.pack_start(left_column, True, True, 0)
         left_column.pack_start(Gtk.Label("Inputs"), False, False, 0)
 
         right_column = Gtk.Box()
         right_column.set_orientation(Gtk.Orientation.VERTICAL)
-        right_column.set_homogeneous(False)
         columns.pack_start(right_column, True, True, 0)
         right_column.pack_start(Gtk.Label("Outputs"), False, False, 0)
 
         inputs = Gtk.Box()
         inputs.set_orientation(Gtk.Orientation.VERTICAL)
-        inputs.set_homogeneous(False)
         left_column.pack_start(inputs, True, True, 0)
 
         outputs = Gtk.Box()
         outputs.set_orientation(Gtk.Orientation.VERTICAL)
-        outputs.set_homogeneous(False)
         right_column.pack_start(outputs, True, True, 0)
 
-        add_input = Gtk.Button.new_with_label("Add")
+        add_input = Gtk.Button("Add")
         add_input.connect("clicked", button_clicked, inputs)
         left_column.pack_start(add_input, False, False, 0)
 
-        add_output = Gtk.Button.new_with_label("Add")
+        add_output = Gtk.Button("Add")
         add_output.connect("clicked", button_clicked, outputs)
         right_column.pack_start(add_output, False, False, 0)
 
@@ -114,12 +105,8 @@ def menu_item_activated(menu_item, graph):
 
             graph.add_node(node)
         dialog.close()
-         
-
     elif("Delete Node" in label):
         graph.remove_selected_nodes()
-    elif("Auto-arrange" in label):
-        pass
 
 
 def button_clicked(button, vbox):
