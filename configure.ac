@@ -4,6 +4,8 @@ AC_CONFIG_HEADERS([config.h])
 
 AC_CONFIG_MACRO_DIR([m4])
 
+GOBJECT_INTROSPECTION_CHECK([1.30.0])
+
 LT_INIT
 
 AC_CONFIG_FILES([  graph-gtk.pc:graph-gtk.pc.in
